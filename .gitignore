@@ -1,1 +1,3 @@
-/connectivitytest-output-dump.txt
+connectivitytest-output-dump.txt
+.vscode
+*.pyc

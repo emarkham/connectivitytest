@@ -44,8 +44,6 @@ for i in interfaces:
             addr = sh.grep(sh.grep(sh.netstat("-n", "-I", i), "en0"), "-v", "Link#").split()[3]
             router = sh.grep(sh.networksetup("-getinfo", networkservice), "Router").split()[1]
             dnsserver = sh.grep(sh.sed(sh.scutil("--dns"), "-n", "-e", "/DNS configuration (for scoped queries)/,/Reach/p"), "nameserver").split()[2]
-            # scutil --dns | sed -n -e "/DNS configuration (for scoped queries)/,/Reach/p" | grep nameserver
-            # networksetup -getinfo "Wi-Fi"
             iftable.update({i: [networkservice, addr, router, dnsserver]})
 
 for intf in iftable:
