@@ -51,7 +51,7 @@ for intf in iftable:
 
 # TODO:
 # warn if interface is Wi-Fi,  needs to be wired for a real connectivity test
-# 
+#
 
 # TODO:
 # warn on 10/100 link connectivity (SSS only support 1G/10G)
@@ -104,6 +104,7 @@ print("")
 print("Checking Proxy Configuration...")
 proxymode = sh.networksetup("-getwebproxy",  networkservice)
 if "Enabled: Yes" in proxymode:
+    # TODO: check proxy stuff
     # ProxyMode: http
     #                 proxy-wsa-esl.cisco.com.:8080
     # Ping proxy-wsa-esl.cisco.com....FAIL
@@ -115,5 +116,9 @@ else:
 
 
 print("")
-print("Checking http reachability to skycontrol.skyportsystems.com over GET.")
+print("Checking http reachability  to http://skycontrol.skyportsystems.com using GET.")
+print(sh.curl("-I", "http://skysecure.skyportsystems.com"))
+
+print("")
+print("Checking https reachability to https://skycontrol.skyportsystems.com using GET.")
 print(sh.curl("-I", "https://skysecure.skyportsystems.com"))
