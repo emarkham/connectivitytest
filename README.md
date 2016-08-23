@@ -1,8 +1,8 @@
 # connectivitytest
 
-This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to troubleshoot the what's going on from your own laptop.
+This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to troubleshoot what's going on from your own laptop than to try from the USB console.
 
- "Why not just run the (9) script locally," you ask?
+ "Why not just run the (9) script from your laptop," you ask?
 
  Reasons:
 
@@ -19,7 +19,7 @@ This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to 
 
  - Simpler, easier
 
- The bad news is this thing needs to get refactored. Like, BADLY.
+ The bad news is this code needs to get refactored. Like, BADLY.
 
  This script leans heavily on sh.py, a really neat Python lib that lets you write utterly horrible BASH-ish code
  then glue it all together using what pretends to be python.
@@ -48,4 +48,4 @@ You should see some output. Hopefully that output will tell you why the SkySecur
 
 - 10/100 ethernet connecivity warning
 - duplicate IP test
-- reverse lookups
+- reverse lookups for test laptop and against SSC

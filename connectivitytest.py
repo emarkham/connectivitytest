@@ -49,6 +49,12 @@ for i in interfaces:
 for intf in iftable:
     print("{} {} active".format(intf, iftable[intf][1]))
 
+# TODO:
+# warn if interface is Wi-Fi,  needs to be wired for a real connectivity test
+# 
+
+# TODO:
+# warn on 10/100 link connectivity (SSS only support 1G/10G)
 
 print("\nChecking Gateway assignment...")
 gateway_a = sh.grep(sh.route("-n", "get", "8.8.8.8"), "gateway").split()[1]
@@ -60,11 +66,8 @@ for intf in iftable:
         print(iftable[intf][2], gateway_a)
         sys.exit(1)
 
-# TODO: don't know how to do this
+# TODO: don't know how to programmatically check for IP conflict, scutil has some stuff
 # Checking Duplicate IP assignment using ARPING
-#                 ARPING 172.18.181.11 from 0.0.0.0 lan0
-#                 Sent 11 probes (11 broadcast(s))
-#                 Received 0 response(s)
 print("Checking gateway reachability by pinging gateway...")
 for inf in iftable:
     for line in sh.ping("-c", "4", iftable[inf][2], _iter=True):
@@ -85,10 +88,12 @@ for inf in iftable:
         else:
             print("Can't reach {}".format(dnsserver))
             sys.exit(1)
-# TODO:
+
+# TODO: perform reverse lookup on this host
 # Running reverse-lookup on 172.18.181.11 (skysecure-1)...OK
-# Ping skycontrol.skyportsystems.com...OK
-# TODO: find out what's with the sh.ping() problem
+
+
+# TODO: option to skip traceroute step (can be slow)
 print("")
 print("Running traceroute to skycontrol.skyportsystems.com (max 16 hops)")
 for line in sh.traceroute("-m", 16, "-w", 1, "-n", "skycontrol.skyportsystems.com", _iter=True):
