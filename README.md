@@ -46,6 +46,9 @@ You should see some output. Hopefully that output will tell you why the SkySecur
 
 # TODO:
 
+- warn if interface is Wi-Fi
 - 10/100 ethernet connecivity warning
 - duplicate IP test
 - reverse lookups for test laptop and against SSC
+- option to skip traceroute
+- proxy connectivity tests

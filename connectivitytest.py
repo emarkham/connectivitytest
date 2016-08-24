@@ -49,12 +49,10 @@ for i in interfaces:
 for intf in iftable:
     print("{} {} active".format(intf, iftable[intf][1]))
 
-# TODO:
-# warn if interface is Wi-Fi,  needs to be wired for a real connectivity test
+# TODO: warn if interface is Wi-Fi, needs to be wired for a real connectivity test
 #
 
-# TODO:
-# warn on 10/100 link connectivity (SSS only support 1G/10G)
+# TODO: warn on 10/100 link connectivity (SSS only support 1G/10G)
 
 print("\nChecking Gateway assignment...")
 gateway_a = sh.grep(sh.route("-n", "get", "8.8.8.8"), "gateway").split()[1]
@@ -66,22 +64,20 @@ for intf in iftable:
         print(iftable[intf][2], gateway_a)
         sys.exit(1)
 
-# TODO: don't know how to programmatically check for IP conflict, scutil has some stuff
-# Checking Duplicate IP assignment using ARPING
+# TODO: check for duplicate IP assignment
+# don't know how to programmatically check for IP conflict, scutil has some stuff
 print("Checking gateway reachability by pinging gateway...")
 for inf in iftable:
     for line in sh.ping("-c", "4", iftable[inf][2], _iter=True):
         print(line.rstrip('\n'))
 
-print("Checking DNS server assignment...")
 print("Checking DNS server(s) reachability by pinging DNS server by IP, then do a DIG and see if we get a response...")
 for inf in iftable:
     if iftable[inf][3]:
         dnsserver = iftable[inf][3]
-        print("OK")
         print("Checking if {} is reachable...".format(dnsserver))
         print(sh.scutil("-r", dnsserver))
-        print("Resolving skycontrol.skyportsystems.com by dig..OK")
+        print("Resolving skycontrol.skyportsystems.com by dig...")
         if "Reachable" in sh.scutil("-r", "skycontrol.skyportsystems.com"):
             print("skycontrol.skyportsystems.com resolves to:")
             print(sh.dig("+short", "+identify", "skycontrol.skyportsystems.com"))
@@ -89,7 +85,7 @@ for inf in iftable:
             print("Can't reach {}".format(dnsserver))
             sys.exit(1)
 
-# TODO: perform reverse lookup on this host
+# TODO: perform reverse DNS lookup on this host
 # Running reverse-lookup on 172.18.181.11 (skysecure-1)...OK
 
 
@@ -104,7 +100,7 @@ print("")
 print("Checking Proxy Configuration...")
 proxymode = sh.networksetup("-getwebproxy",  networkservice)
 if "Enabled: Yes" in proxymode:
-    # TODO: check proxy stuff
+    # TODO: check proxy connectivity
     # ProxyMode: http
     #                 proxy-wsa-esl.cisco.com.:8080
     # Ping proxy-wsa-esl.cisco.com....FAIL
