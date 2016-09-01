@@ -17,7 +17,8 @@ This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to 
 
  Which brings me to:
 
- - Simpler, easier
+ - It was simpler and easier just to rewrite (9)
+
 
  The bad news is this code needs to get refactored. Like, BADLY.
 
