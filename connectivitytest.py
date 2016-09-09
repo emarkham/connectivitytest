@@ -21,8 +21,9 @@ try:
     import sh
 except:
     print("You need sh.py installed!s")
-    print("You should have gotten a copy of sh.py with this script.")
-    print("install via 'sudo pip install sh' or download from https://raw.githubusercontent.com/amoffat/sh/master/sh.py")
+    print("You should have gotten a copy of sh.py with this script from https://github.com/emarkham/connectivitytest.git")
+    print("Or you can manually install sh.py via 'sudo pip install sh'")
+    print("Or download sh.py from https://raw.githubusercontent.com/amoffat/sh/master/sh.py")
     sys.exit(1)
 
 # neat trick, 'scutil --nwi' shows the active network interfaces that can connect to the internet
@@ -48,9 +49,15 @@ for i in interfaces:
 
 for intf in iftable:
     print("{} {} active".format(intf, iftable[intf][1]))
+    if 'Wi-Fi' in iftable[intf][0]:
+        # warn if interface is Wi-Fi, needs to be wired for a real connectivity test
+        print("")
+        print("##########################################################################")
+        print("Warning: {} is a Wi-Fi interface! Tests will not be accurate!".format(intf))
+        print("You should run this script connected the network same as the SSS")
+        print("##########################################################################")
+        sh.sleep(5)
 
-# TODO: warn if interface is Wi-Fi, needs to be wired for a real connectivity test
-#
 
 # TODO: warn on 10/100 link connectivity (SSS only support 1G/10G)
 
@@ -65,18 +72,23 @@ for intf in iftable:
         sys.exit(1)
 
 # TODO: check for duplicate IP assignment
-# don't know how to programmatically check for IP conflict, scutil has some stuff
+# don't know how to programmatically check for IP conflict, maybe scutil has some stuff?
 print("Checking gateway reachability by pinging gateway...")
 for inf in iftable:
     for line in sh.ping("-c", "4", iftable[inf][2], _iter=True):
         print(line.rstrip('\n'))
 
+print("")
 print("Checking DNS server(s) reachability by pinging DNS server by IP, then do a DIG and see if we get a response...")
 for inf in iftable:
     if iftable[inf][3]:
         dnsserver = iftable[inf][3]
         print("Checking if {} is reachable...".format(dnsserver))
-        print(sh.scutil("-r", dnsserver))
+        print("Pinging DNS server...")
+        for line in sh.ping("-c", "4", dnsserver, _iter=True):
+            print(line.strip('\n'))
+        print("DNS server is {}".format(sh.scutil("-r", dnsserver)))
+        print("")
         print("Resolving skycontrol.skyportsystems.com by dig...")
         if "Reachable" in sh.scutil("-r", "skycontrol.skyportsystems.com"):
             print("skycontrol.skyportsystems.com resolves to:")

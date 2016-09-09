@@ -1,6 +1,7 @@
 # connectivitytest
 
-This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to troubleshoot what's going on from your own laptop than to try from the USB console.
+This is a work-in-progress script that replicates (9) in NetWiz.
+Sometimes it's easier to troubleshoot what's going on from your own laptop than to use the SkySecure Server USB console.
 
  "Why not just run the (9) script from your laptop," you ask?
 
@@ -25,7 +26,7 @@ This is a shitty script that replicates (9) in NetWiz. Sometimes it's easier to 
  This script leans heavily on sh.py, a really neat Python lib that lets you write utterly horrible BASH-ish code
  then glue it all together using what pretends to be python.
 
-# How to use
+## How to use
 
 open Terminal, then do:
 
@@ -35,9 +36,10 @@ open Terminal, then do:
 
 You should see some output. Hopefully that output will tell you why the SkySecure Server isn't reaching SkySecure Center.
 
-# Tests the script runs:
+## connectivitytest runs:
 
 - interface check
+- warn if interface is Wi-Fi
 - pings the gateway
 - DNS reachability check
 - DNS resolution check
@@ -45,9 +47,8 @@ You should see some output. Hopefully that output will tell you why the SkySecur
 - proxy config check
 - HTTP GET skycontrol.skyportsystems.com
 
-# TODO:
+## TODO:
 
-- warn if interface is Wi-Fi
 - 10/100 ethernet connecivity warning
 - duplicate IP test
 - reverse lookups for test laptop and against SSC
