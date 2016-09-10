@@ -4,16 +4,18 @@
 # this is a shitty script that replicates (9) in NetWiz
 # Why not just use the (9) script you ask?
 # reasons:
-# - (9) doesn't work on a Mac w/o a lot of stuff. No ethtool. No arping. Output for similarly named tools is different
-# fixing this would require the user to download a lot of stuff from either Homebrew or run this in a VM
-# I think a VM is too heavyweight to deal with in a customer environment.
-# Also, when you use a VM you can't use the neat built-in network stuff that Mac OS X has in scutil and networksetup
-# Which brings me to:
-# - Simpler, easier
+# - (9) doesn't work on a Mac w/o a lot of stuff. No ethtool. No arping. Output
+# for similarly named tools is different fixing this would require the user to
+# download a lot of stuff from either Homebrew or run this in a VM I think a VM
+# is too heavyweight to deal with in a customer environment. Also, when you use
+# a VM you can't use the neat built-in network stuff that Mac OS X has in scutil
+# and networksetup Which brings me to:
+# - Simpler, easier just to re-write (9)
 #
-# The bad news is this thing needs to get refactored. Like, BADLY.
-# This script leans heavily on sh.py, a really neat Python lib that lets you write utterly horrible BASH-ish code
-# then glue it all together using what pretends to be python.
+# The bad news is this thing needs to get refactored. Like, BADLY. This script
+# leans heavily on sh.py, a really neat Python lib that lets you write utterly
+# horrible BASH-ish code then glue it all together using what pretends to be
+# python.
 #
 
 import sys
@@ -98,6 +100,7 @@ for inf in iftable:
             sys.exit(1)
 
 # TODO: perform reverse DNS lookup on this host
+# 
 # Running reverse-lookup on 172.18.181.11 (skysecure-1)...OK
 
 
