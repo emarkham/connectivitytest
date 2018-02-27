@@ -17,14 +17,15 @@
 # horrible BASH-ish code then glue it all together using what pretends to be
 # python.
 #
+# pylint: disable=print-statement,no-member,superfluous-parens
 
 import sys
 try:
-    import sh
+    import sh  
 except:
-    print("You need sh.py installed!s")
+    print("You need sh.py installed!")
     print("You should have gotten a copy of sh.py with this script from https://github.com/emarkham/connectivitytest.git")
-    print("Or you can manually install sh.py via 'sudo pip install sh'")
+    print("Or you can manually install sh.py via 'pip install sh'")
     print("Or download sh.py from https://raw.githubusercontent.com/amoffat/sh/master/sh.py")
     sys.exit(1)
 
@@ -43,7 +44,7 @@ except:
 for i in interfaces:
     for j in sh.ifconfig(i):
         if "status: active" in j:
-            networkservice = sh.egrep(sh.grep(sh.networksetup("-listnetworkserviceorder"), "-B1", i), "(\d)").split()[1]
+            networkservice = sh.egrep(sh.grep(sh.networksetup("-listnetworkserviceorder"), "-B1", i), "(\d)").split()[1] # pylint: disable=W1401
             addr = sh.grep(sh.grep(sh.netstat("-n", "-I", i), "en0"), "-v", "Link#").split()[3]
             router = sh.grep(sh.networksetup("-getinfo", networkservice), "Router").split()[1]
             dnsserver = sh.grep(sh.sed(sh.scutil("--dns"), "-n", "-e", "/DNS configuration (for scoped queries)/,/Reach/p"), "nameserver").split()[2]
@@ -56,7 +57,7 @@ for intf in iftable:
         print("")
         print("##########################################################################")
         print("Warning: {} is a Wi-Fi interface! Tests will not be accurate!".format(intf))
-        print("You should run this script connected the network same as the SSS")
+        print("You should run this script connected to the same network as the SSS")
         print("##########################################################################")
         sh.sleep(5)
 
@@ -113,7 +114,7 @@ for line in sh.traceroute("-m", 16, "-w", 1, "-n", "skycontrol.skyportsystems.co
 
 print("")
 print("Checking Proxy Configuration...")
-proxymode = sh.networksetup("-getwebproxy",  networkservice)
+proxymode = sh.networksetup("-getwebproxy", networkservice)
 if "Enabled: Yes" in proxymode:
     # TODO: check proxy connectivity
     # ProxyMode: http

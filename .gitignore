@@ -2,3 +2,5 @@
 .vscode
 *.pyc
 gitkey
+.DS_Store
+connectivitytest-output-dump.txt

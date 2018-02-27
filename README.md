@@ -1,13 +1,13 @@
 # connectivitytest
 
-This is a work-in-progress script that replicates (9) in NetWiz.
+This is a work-in-progress script that replicates [9] in NetWiz.
 Sometimes it's easier to troubleshoot what's going on from your own laptop than to use the SkySecure Server USB console.
 
- "Why not just run the (9) script from your laptop," you ask?
+ "Why not just run the [9] script from your laptop," you ask?
 
  Reasons:
 
- - (9) doesn't work on a Mac w/o a lot of stuff
+ - [9] doesn't work on a Mac w/o a lot of stuff
 
  No ethtool. No arping. Output for similarly named tools is different between the two platforms.
  Fixing this would require the user to download a lot of stuff from Homebrew or run in a VM.
@@ -18,7 +18,7 @@ Sometimes it's easier to troubleshoot what's going on from your own laptop than 
 
  Which brings me to:
 
- - It was simpler and easier just to rewrite (9)
+ - It was simpler and easier just to rewrite [9]
 
 
  The bad news is this code needs to get refactored. Like, BADLY.
